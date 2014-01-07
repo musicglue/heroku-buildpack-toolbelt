@@ -66,8 +66,13 @@ mkdir -p $BUILD_DIR/.profile.d
 cp "$BUILDPACK_DIR/bin/gen-netrc.sh" $BUILD_DIR/.profile.d/
 chmod +x $BUILD_DIR/.profile.d/gen-netrc.sh
 
+echo "-----> Moving the heroku toolbelt PATH script into app/.profile.d"
+cp "$BUILDPACK_DIR/bin/toolbelt.sh" $BUILD_DIR/.profile.d/
+chmod +x $BUILD_DIR/.profile.d/toolbelt.sh
+
 echo "-----> Installing heroku-exit-status plugin"
 
 "$BUILD_DIR/$VENDORED_TOOLBELT/bin/heroku" plugins:install https://github.com/glenngillen/heroku-exit-status.git
+mv ~/.heroku $BUILD_DIR
 
 echo "-----> heroku toolbelt installation done"
